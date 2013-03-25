@@ -1,0 +1,35 @@
+from Tkinter import *
+import os
+import sys
+import psutil
+import tkSimpleDialog
+root=Tk()
+def taska():
+    print 'THIS IS THE LIST OF ALL PROCESS RUNNING'
+    print psutil.test()
+
+def taskb():
+    print 'ALL PID WHICH ARE ACTIVELY RUNNING '
+    print psutil.get_pid_list()
+
+ab=0
+Button(root,text='CLICK TO GET LIST',command=taska).pack(fill=X)
+Button(root,text='CLICK FOR RUNNING PID',command=taskb).pack(fill=X)
+scl = Scale(root,from_=-20,to=20,tickinterval=10,resolution=10,length=200,orient='horizontal')
+scl.pack(expand=YES,fill=X,side=RIGHT)
+def taskc():
+    ab=scl.get()
+    print ab
+
+Button(root,text='SUBMIT FOR SLIDER',command=taskc).pack(fill=X)
+def taskd():
+    ans = tkSimpleDialog.askinteger("Dialog (Integer)", "Enter your pid value:", parent=wps,minvalue=0,maxvalue=7000)
+    p = psutil.Process(ans)
+    print p.name
+    print ans
+    p.nice = ab
+
+wps=Button(root,text='CLICK FOR PID ENTRY',command=taskd)
+wps.pack(fill=X)
+Button(root,text='QUIT',command=sys.exit).pack(fill=X)
+root.mainloop()
